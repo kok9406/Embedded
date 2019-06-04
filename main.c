@@ -1,4 +1,4 @@
-tt/* Copyright 2011-2013 Bert Muennich
+/* Copyright 2011-2013 Bert Muennich
  *
  * This file is part of sxiv.
  *
@@ -154,7 +154,7 @@ timeout_t timeouts[] = {
    { { 0, 0 }, false, clear_resize },
 };
 
-void cleanup(void)                                 //false °ªÀÌ ¾Æ´Ï¸é inÀ» ture·Î ÇÏ°í img¸¦ ´İ°í, ÁÖ¼Ò ÃÊ±âÈ­, win ´İ°í
+void cleanup(void)                                 //false ê°’ì´ ì•„ë‹ˆë©´ inì„ tureë¡œ í•˜ê³  imgë¥¼ ë‹«ê³ , ì£¼ì†Œ ì´ˆê¸°í™”, win ë‹«ê³ 
 {
 	static bool in = false;
 
@@ -170,70 +170,70 @@ void check_add_file(char* filename)
 {
 	const char* bn;
 
-	if (filename == NULL || *filename == '\0')            //ÆÄÀÏÀÌ¸§ÀÌ ¾ø°Å³ª ÁÖ¼Ò¾È¿¡ ¾Æ¹«°Íµµ ¾øÀ»‹š
+	if (filename == NULL || *filename == '\0')            //íŒŒì¼ì´ë¦„ì´ ì—†ê±°ë‚˜ ì£¼ì†Œì•ˆì— ì•„ë¬´ê²ƒë„ ì—†ì„Â‹Âš
 		return;
 
-	if (access(filename, R_OK) < 0) {                  //access : ÆÄÀÏ Á¸Àç Á¶»ç, filename °æ·Î, mode À¯¹«Á¶»ç Á¤»ó½Ã 0, ¿¡·¯½Ã -1                              
-		warn("could not open file: %s", filename);         //ÆÄÀÏÀÌ ¾øÀ»‹šÀÓ
+	if (access(filename, R_OK) < 0) {                  //access : íŒŒì¼ ì¡´ì¬ ì¡°ì‚¬, filename ê²½ë¡œ, mode ìœ ë¬´ì¡°ì‚¬ ì •ìƒì‹œ 0, ì—ëŸ¬ì‹œ -1                              
+		warn("could not open file: %s", filename);         //íŒŒì¼ì´ ì—†ì„Â‹Âšì„
 		return;
 	}
 
-	if (fileidx == filecnt) {                        //fileidx°¡ filentÀÏ¶§ filecnt¿¡ 2¸¦ °öÇÏ°í
+	if (fileidx == filecnt) {                        //fileidxê°€ filentì¼ë•Œ filecntì— 2ë¥¼ ê³±í•˜ê³ 
 		filecnt *= 2;
-		files = (fileinfo_t*)s_realloc(files, filecnt * sizeof(fileinfo_t)); //realloc : µ¿ÀûÀ¸·Î ÇÒ´çÇÑ ¸Ş¸ğ¸®ÀÇ Å©±â Á¶Àı(Ã¹ÀÎÀÚ : ÀÌÀü µ¿ÀûÀ¸·Î ÇÒ´ç ¸Ş¸ğ¸® ÁÖ¼Ò, »õ·Î ÇÒ´çÇÒ ¸Ş¸ğ¸® Å©±â)
-	}                                                         //reallocÀÇ °ªÀ» fileinfo_t*À¸·Î castÇØ¼­ files·Î ÀúÀå
+		files = (fileinfo_t*)s_realloc(files, filecnt * sizeof(fileinfo_t)); //realloc : ë™ì ìœ¼ë¡œ í• ë‹¹í•œ ë©”ëª¨ë¦¬ì˜ í¬ê¸° ì¡°ì ˆ(ì²«ì¸ì : ì´ì „ ë™ì ìœ¼ë¡œ í• ë‹¹ ë©”ëª¨ë¦¬ ì£¼ì†Œ, ìƒˆë¡œ í• ë‹¹í•  ë©”ëª¨ë¦¬ í¬ê¸°)
+	}                                                         //reallocì˜ ê°’ì„ fileinfo_t*ìœ¼ë¡œ castí•´ì„œ filesë¡œ ì €ì¥
 
-#if defined _BSD_SOURCE || defined _XOPEN_SOURCE && \                     //BSD_SOURCE, XOPEN_SOURCE, ¾Æ¹«°Íµµ ¾øÀ»°æ¿ì
-	((_XOPEN_SOURCE - 0) >= 500 || defined _XOPEN_SOURCE_EXTENDED)            //XOPEN_SOUCRE - 0 °¡ 500º¸´Ù Å©°Å³ª _XOPEN_SOURCE_EXTENDED Á¤ÀÇµÌÀ»°æ¿ì
+#if defined _BSD_SOURCE || defined _XOPEN_SOURCE && \                     //BSD_SOURCE, XOPEN_SOURCE, ì•„ë¬´ê²ƒë„ ì—†ì„ê²½ìš°
+	((_XOPEN_SOURCE - 0) >= 500 || defined _XOPEN_SOURCE_EXTENDED)            //XOPEN_SOUCRE - 0 ê°€ 500ë³´ë‹¤ í¬ê±°ë‚˜ _XOPEN_SOURCE_EXTENDED ì •ì˜ë«ì„ê²½ìš°
 
-		if ((files[fileidx].path = realpath(filename, NULL)) == NULL) {            //files[fileidx]ÀÇ path°¡ Àı´ë°æ·Î(filename.NULL)ÀÌ°í ÀÌ°Ô NULLÀÌ¸é realpath°¡ ¾Æ´Ï¶ó´Â °æ°í
+		if ((files[fileidx].path = realpath(filename, NULL)) == NULL) {            //files[fileidx]ì˜ pathê°€ ì ˆëŒ€ê²½ë¡œ(filename.NULL)ì´ê³  ì´ê²Œ NULLì´ë©´ realpathê°€ ì•„ë‹ˆë¼ëŠ” ê²½ê³ 
 			warn("could not get real path of file: %s\n", filename);
 			return;
 		}
 #else
-	if (*filename != '/') {                                          //filenameÀÇ ÁÖ¼Ò°ªÀÌ '/'ÀÌ ¾Æ´Ï¸é
-		if ((files[fileidx].path = absolute_path(filename)) == NULL) {         //files[fileidx]ÀÇ path°¡ Àı´ë°æ·ÎÀÌ°í ÀÌ°Ô NULLÀÌ¸é Àı´ë°æ·Î ¾Æ´Ï¶ó´Â °æ°í¸¦ ¶Ù¿ò
+	if (*filename != '/') {                                          //filenameì˜ ì£¼ì†Œê°’ì´ '/'ì´ ì•„ë‹ˆë©´
+		if ((files[fileidx].path = absolute_path(filename)) == NULL) {         //files[fileidx]ì˜ pathê°€ ì ˆëŒ€ê²½ë¡œì´ê³  ì´ê²Œ NULLì´ë©´ ì ˆëŒ€ê²½ë¡œ ì•„ë‹ˆë¼ëŠ” ê²½ê³ ë¥¼ ë›°ì›€
 			warn("could not get absolute path of file: %s\n", filename);
 			return;
 		}
 	}
 	else {
-		files[fileidx].path = NULL;                                    //files[fileidx].path´Â NULLÀÌ´Ù
+		files[fileidx].path = NULL;                                    //files[fileidx].pathëŠ” NULLì´ë‹¤
 	}
 #endif
 
-	files[fileidx].loaded = false;                                    //files[fileidx] ·Îµå ½ÇÆĞ
-	files[fileidx].name = s_strdup(filename);                           //files[fileidx]ÀÇ nameÀº (filenameÀÇ ±æÀÌ + 1)ÇØ¼­ return, s°¡ ¾øÀ¸¸é ¸Ş¸ğ¸® ÇÒ´çÇÏÁö ¾ÊÀ½( util.c )
+	files[fileidx].loaded = false;                                    //files[fileidx] ë¡œë“œ ì‹¤íŒ¨
+	files[fileidx].name = s_strdup(filename);                           //files[fileidx]ì˜ nameì€ (filenameì˜ ê¸¸ì´ + 1)í•´ì„œ return, sê°€ ì—†ìœ¼ë©´ ë©”ëª¨ë¦¬ í• ë‹¹í•˜ì§€ ì•ŠìŒ( util.c )
 	if (files[fileidx].path == NULL)
-		files[fileidx].path = files[fileidx].name;                        //   files[fileidx]°æ·Î°¡ NULLÀÌ¸é files[fileidx]ÀÇ nameÀ» (filenameÀÇ ±æÀÌ + 1)ÇØ¼­ return, s°¡ ¾øÀ¸¸é ¸Ş¸ğ¸® ÇÒ´çÇÏÁö ¾ÊÀ½( util.c )
-	if ((bn = strrchr(files[fileidx].name, '/')) != NULL && bn[1] != '\0')      // bn( files[fileidx].nameÀÇ ¸¶Áö¸·¿¡ '/'ÀÌ ÀÖÀ¸¸é ±× ÁÖ¼Ò¸¦ ¹İÈ¯)ÀÌ NULL ¾Æ´Ï°í bn[1]ÀÌ NULLÀÌ ¾Æ´Ï¸é
+		files[fileidx].path = files[fileidx].name;                        //   files[fileidx]ê²½ë¡œê°€ NULLì´ë©´ files[fileidx]ì˜ nameì„ (filenameì˜ ê¸¸ì´ + 1)í•´ì„œ return, sê°€ ì—†ìœ¼ë©´ ë©”ëª¨ë¦¬ í• ë‹¹í•˜ì§€ ì•ŠìŒ( util.c )
+	if ((bn = strrchr(files[fileidx].name, '/')) != NULL && bn[1] != '\0')      // bn( files[fileidx].nameì˜ ë§ˆì§€ë§‰ì— '/'ì´ ìˆìœ¼ë©´ ê·¸ ì£¼ì†Œë¥¼ ë°˜í™˜)ì´ NULL ì•„ë‹ˆê³  bn[1]ì´ NULLì´ ì•„ë‹ˆë©´
 		files[fileidx].base = ++bn;                                    //files[fileidx].base = ++bn;   
 	else
-		files[fileidx].base = files[fileidx].name;                        //files[fileidx].base = files[fileidx].nameÀÌ´Ù.                              
+		files[fileidx].base = files[fileidx].name;                        //files[fileidx].base = files[fileidx].nameì´ë‹¤.                              
 	fileidx++;
 }
 
-void remove_file(int n, bool manual)                                 //ÆÄÀÏ Á¦°Å   ( bool : ture , false ÀúÀå         )               
+void remove_file(int n, bool manual)                                 //íŒŒì¼ ì œê±°   ( bool : ture , false ì €ì¥         )               
 {
 	if (n < 0 || n >= filecnt)
 		return;
 
 	if (filecnt == 1) {
 		if (!manual)
-			fprintf(stderr, "sxiv: no more files to display, aborting\n");         //filecnt == 1 ÀÌ°í manualÀÌ ¾Æ´Ï¸é ÆÄÀÏ ¾øÀ½ ¾Ë¸²         
+			fprintf(stderr, "sxiv: no more files to display, aborting\n");         //filecnt == 1 ì´ê³  manualì´ ì•„ë‹ˆë©´ íŒŒì¼ ì—†ìŒ ì•Œë¦¼         
 		cleanup();
 		exit(manual ? EXIT_SUCCESS : EXIT_FAILURE);
 	}
 
-	if (files[n].path != files[n].name)                                    //files[n].path != files[n].name ÀÌ¸é µÑ´Ù free ½ÃÅ´
+	if (files[n].path != files[n].name)                                    //files[n].path != files[n].name ì´ë©´ ë‘˜ë‹¤ free ì‹œí‚´
 		free((void*)files[n].path);
 	free((void*)files[n].name);
 
 	if (n + 1 < filecnt)
-		memmove(files + n, files + n + 1, (filecnt - n - 1) * sizeof(fileinfo_t));   //memove:(º¹»çµÇ´Â ¸Ş¸ğ¸®ÀÇ Ã¹¹ø¤Š ÁÖ¼Ò, º¹»çÇÒ ¸Ş¸ğ¸®ÀÇ Ã¹¹ø¤Š ÁÖ¼Ò,º¹»çÇÒÅ©±â)
+		memmove(files + n, files + n + 1, (filecnt - n - 1) * sizeof(fileinfo_t));   //memove:(ë³µì‚¬ë˜ëŠ” ë©”ëª¨ë¦¬ì˜ ì²«ë²ˆÂŠ ì£¼ì†Œ, ë³µì‚¬í•  ë©”ëª¨ë¦¬ì˜ ì²«ë²ˆÂŠ ì£¼ì†Œ,ë³µì‚¬í• í¬ê¸°)
 	if (n + 1 < tns.cnt) {
-		memmove(tns.thumbs + n, tns.thumbs + n + 1, (tns.cnt - n - 1) * sizeof(thumb_t));       //memove:(º¹»çµÇ´Â ¸Ş¸ğ¸®ÀÇ Ã¹¹ø¤Š ÁÖ¼Ò, º¹»çÇÒ ¸Ş¸ğ¸®ÀÇ Ã¹¹ø¤Š ÁÖ¼Ò,º¹»çÇÒÅ©±â)
-		memset(tns.thumbs + tns.cnt - 1, 0, sizeof(thumb_t));                           //memset : (¼ÂÆÃÇÒ ¸Ş¸ğ¸®ºí·°ÀÇ Ã¹ÁÖ¼Ò, ¼¼ÆÃÇÒ °ª, ¼¼ÆÃÇÒ ¸Ş¸ğÀÇ ºí·°ÀÇ Å©±â)      
+		memmove(tns.thumbs + n, tns.thumbs + n + 1, (tns.cnt - n - 1) * sizeof(thumb_t));       //memove:(ë³µì‚¬ë˜ëŠ” ë©”ëª¨ë¦¬ì˜ ì²«ë²ˆÂŠ ì£¼ì†Œ, ë³µì‚¬í•  ë©”ëª¨ë¦¬ì˜ ì²«ë²ˆÂŠ ì£¼ì†Œ,ë³µì‚¬í• í¬ê¸°)
+		memset(tns.thumbs + tns.cnt - 1, 0, sizeof(thumb_t));                           //memset : (ì…‹íŒ…í•  ë©”ëª¨ë¦¬ë¸”ëŸ­ì˜ ì²«ì£¼ì†Œ, ì„¸íŒ…í•  ê°’, ì„¸íŒ…í•  ë©”ëª¨ì˜ ë¸”ëŸ­ì˜ í¬ê¸°)      
 	}
 
 	filecnt--;
@@ -297,15 +297,15 @@ bool check_timeouts(struct timeval* t)
 	return tmin > 0;
 }
 
-void open_info(void)                                                //open Á¤º¸
+void open_info(void)                                                //open ì •ë³´
 {
 	static pid_t pid;
 	int pfd[2];
 
-	if (info.cmd == NULL || info.open || win.bar.h == 0)                     //info¶ó´Â ±¸Á¶Ã¼ °ªÀÌ (info.cmd == NULL || info.open || win.bar.h == 0)         
+	if (info.cmd == NULL || info.open || win.bar.h == 0)                     //infoë¼ëŠ” êµ¬ì¡°ì²´ ê°’ì´ (info.cmd == NULL || info.open || win.bar.h == 0)         
 		return;
-	if (info.fd != -1) {                                             //info.fd != -1ÀÌ¸é close(info.fd
-		close(info.fd);                                                //info.fd¸¦ ´İ´Â´Ù      
+	if (info.fd != -1) {                                             //info.fd != -1ì´ë©´ close(info.fd
+		close(info.fd);                                                //info.fdë¥¼ ë‹«ëŠ”ë‹¤      
 		kill(pid, SIGTERM);                                             //SIGTERM : Software termination signal from kill               
 		info.fd = -1;
 	}
@@ -313,31 +313,31 @@ void open_info(void)                                                //open Á¤º¸
 
 	if (pipe(pfd) < 0)
 		return;
-	pid = fork();                                                   //pid °¡ fork()ÀÌ¸é         
-	if (pid > 0) {                                                   //parent µ¿ÀÛ            
-		close(pfd[1]);                                                //pfd[1]À» ´İ°í pfd[0]ÀÇ Æ¯¼ºÀ» º¯°æ
-		fcntl(pfd[0], F_SETFL, O_NONBLOCK);                                 //fcntl : (Á¦¾îÇÒ ÆÄÀÏÀÇ  ÆÄÀÏ ±â¼úÀÚ, ÆÄÀÏ ±â¼úÀÚ¿¡ ´ëÇÑ Æ¯¼ºÀ» Á¦¾îÇÏ´Â ¸Å°³º¯¼ö, µÎ¹ø¤ŠÀÎÀÚ¿¡ ÀÇÇØ °áÁ¤µÇ´Â ¼±ÅÃÀûÀÎ °ª)
-		info.fd = pfd[0];                                             //info.fd = pfd[0] ÇÏ°í , info.openÀ» ÂüÀ¸·Î
+	pid = fork();                                                   //pid ê°€ fork()ì´ë©´         
+	if (pid > 0) {                                                   //parent ë™ì‘            
+		close(pfd[1]);                                                //pfd[1]ì„ ë‹«ê³  pfd[0]ì˜ íŠ¹ì„±ì„ ë³€ê²½
+		fcntl(pfd[0], F_SETFL, O_NONBLOCK);                                 //fcntl : (ì œì–´í•  íŒŒì¼ì˜  íŒŒì¼ ê¸°ìˆ ì, íŒŒì¼ ê¸°ìˆ ìì— ëŒ€í•œ íŠ¹ì„±ì„ ì œì–´í•˜ëŠ” ë§¤ê°œë³€ìˆ˜, ë‘ë²ˆÂŠì¸ìì— ì˜í•´ ê²°ì •ë˜ëŠ” ì„ íƒì ì¸ ê°’)
+		info.fd = pfd[0];                                             //info.fd = pfd[0] í•˜ê³  , info.openì„ ì°¸ìœ¼ë¡œ
 		info.i = info.lastsep = 0;
 		info.open = true;
 	}
-	else if (pid == 0) {                                             //children µ¿ÀÛ
-		close(pfd[0]);                                                //pfd[0]À» ´İ°í, 
+	else if (pid == 0) {                                             //children ë™ì‘
+		close(pfd[0]);                                                //pfd[0]ì„ ë‹«ê³ , 
 		dup2(pfd[1], 1);
-		execl(info.cmd, info.cmd, files[fileidx].name, NULL);                  //info.cmd¿¡ ÁöÁ¤µÈ °æ·ÎÀÇ ÆÄÀÏÀ» ½ÇÇà                        
+		execl(info.cmd, info.cmd, files[fileidx].name, NULL);                  //info.cmdì— ì§€ì •ëœ ê²½ë¡œì˜ íŒŒì¼ì„ ì‹¤í–‰                        
 		warn("could not exec: %s", info.cmd);
 		exit(EXIT_FAILURE);
 	}
 }
 
-void read_info(void)                                                //read Á¤º¸ (ÀĞ¾îµéÀÎ Á¤º¸ n ÀÌ 0º¸´Ù Ä¿¾ß µ¿ÀÛ)                                             
+void read_info(void)                                                //read ì •ë³´ (ì½ì–´ë“¤ì¸ ì •ë³´ n ì´ 0ë³´ë‹¤ ì»¤ì•¼ ë™ì‘)                                             
 {
 	ssize_t i, n;
 	char buf[BAR_L_LEN];
 
 	while (true) {
-		n = read(info.fd, buf, sizeof(buf));                              //n¿¡ bufÀÇ °ªÀ» info.fd·Î ÀĞ¾î µéÀÓ               
-		if (n < 0 && errno == EAGAIN)                                    //n °ªÀÌ 0º¸´Ù ÀÛ°Å³ª errno¶ó´Â ÁÖ¼Ò°¡ ¿¡·¯ÄÚµåÀÌ¸é
+		n = read(info.fd, buf, sizeof(buf));                              //nì— bufì˜ ê°’ì„ info.fdë¡œ ì½ì–´ ë“¤ì„               
+		if (n < 0 && errno == EAGAIN)                                    //n ê°’ì´ 0ë³´ë‹¤ ì‘ê±°ë‚˜ errnoë¼ëŠ” ì£¼ì†Œê°€ ì—ëŸ¬ì½”ë“œì´ë©´
 			return;
 		else if (n == 0)
 			goto end;
@@ -367,17 +367,17 @@ end:
 
 void load_image(int new)
 {
-	if (new < 0 || new >= filecnt)                                      //new°¡ 0º¸´ÙÅ©°í filecentº¸´Ù ÀÛ¾Æ¾ßÇÔ
+	if (new < 0 || new >= filecnt)                                      //newê°€ 0ë³´ë‹¤í¬ê³  filecentë³´ë‹¤ ì‘ì•„ì•¼í•¨
 		return;
 
-	win_set_cursor(&win, CURSOR_WATCH);                                //Ä¿¼­°ü·Ã ÄÚµùÀÓ     
+	win_set_cursor(&win, CURSOR_WATCH);                                //ì»¤ì„œê´€ë ¨ ì½”ë”©ì„     
 	reset_timeout(slideshow);
 
 	if (new != fileidx)
 		alternate = fileidx;
 
-	img_close(&img, false);                                    //image.c¿¡ ÀÕ´Âµ¥ ÇØ¼® ºÒ°¡                                             
-	while (!img_load(&img, &files[new])) {                        //!img_load½ÇÆĞ½Ã ÆÄÀÏ»èÁ¦
+	img_close(&img, false);                                    //image.cì— ì‡ëŠ”ë° í•´ì„ ë¶ˆê°€                                             
+	while (!img_load(&img, &files[new])) {                        //!img_loadì‹¤íŒ¨ì‹œ íŒŒì¼ì‚­ì œ
 		remove_file(new, false);
 		if (new >= filecnt)
 			new = filecnt - 1;
@@ -396,7 +396,7 @@ void load_image(int new)
 		reset_timeout(animate);
 }
 
-void update_info(void)                                                      //update Á¤º¸
+void update_info(void)                                                      //update ì •ë³´
 {
 	int sel;
 	unsigned int i, fn, fw, n;
@@ -410,18 +410,18 @@ void update_info(void)                                                      //up
 
 	/* update window title */
 	if (mode == MODE_THUMB) {
-		win_set_title(&win, "sxiv")                                             //thumb¸ğµå½Ã sxiv·Î µğ½ºÇÃ·¹ÀÌ Å¸ÀÌÆ² ÁöÁ¤
+		win_set_title(&win, "sxiv")                                             //thumbëª¨ë“œì‹œ sxivë¡œ ë””ìŠ¤í”Œë ˆì´ íƒ€ì´í‹€ ì§€ì •
 	}
 	else {
-		snprintf(title, sizeof(title), "sxiv - %s", files[sel].name);                  //title¿¡ files[sel].name¸¦ title »çÀÌÁî·Î º¹»ç
-		win_set_title(&win, title);                                             //title·Î µğ½ºÇÃ·¹ÀÌ Å¸ÀÌÆ² ÁöÁ¤                                       
+		snprintf(title, sizeof(title), "sxiv - %s", files[sel].name);                  //titleì— files[sel].nameë¥¼ title ì‚¬ì´ì¦ˆë¡œ ë³µì‚¬
+		win_set_title(&win, title);                                             //titleë¡œ ë””ìŠ¤í”Œë ˆì´ íƒ€ì´í‹€ ì§€ì •                                       
 	}
 
 	/* update bar contents */
 	if (win.bar.h == 0)
 		return;
 	mark = files[sel].marked ? "* " : "";
-	if (mode == MODE_THUMB) {                                                //thumb½Ã mark
+	if (mode == MODE_THUMB) {                                                //thumbì‹œ mark
 		if (tns.cnt == filecnt) {
 			n = snprintf(rt, rlen, "%s%0*d/%d", mark, fw, sel + 1, filecnt);
 			ow_info = true;
@@ -432,7 +432,7 @@ void update_info(void)                                                      //up
 			ow_info = false;
 		}
 	}
-	else {                                                         //image ¸ğµå
+	else {                                                         //image ëª¨ë“œ
 		n = snprintf(rt, rlen, "%s", mark);
 		if (img.ss.on)
 			n += snprintf(rt + n, rlen - n, "%ds | ", img.ss.delay);
@@ -447,13 +447,13 @@ void update_info(void)                                                      //up
 		n += snprintf(rt + n, rlen - n, "%0*d/%d", fw, sel + 1, filecnt);
 		ow_info = info.cmd == NULL;
 	}
-	if (ow_info) {                                                      //text Ã¢¿¡  text ¶Ù¿ò
+	if (ow_info) {                                                      //text ì°½ì—  text ë›°ì›€
 		fn = strlen(files[sel].name);
 		if (fn < llen &&
 			win_textwidth(files[sel].name, fn, true) +
 			win_textwidth(rt, n, true) < win.w)
 		{
-			strncpy(lt, files[sel].name, llen);                                           //lt¿¡ files[sel].nameÀ» llen ±æÀÌ·Î º¹»ç
+			strncpy(lt, files[sel].name, llen);                                           //ltì— files[sel].nameì„ llen ê¸¸ì´ë¡œ ë³µì‚¬
 		}
 		else {
 			strncpy(lt, files[sel].base, llen);
@@ -461,20 +461,20 @@ void update_info(void)                                                      //up
 	}
 }
 
-void redraw(void)                                          //ÀÌ¹ÌÁö ¸¸µå´Â ÇÔ¼ö °¡Æ´         
+void redraw(void)                                          //ì´ë¯¸ì§€ ë§Œë“œëŠ” í•¨ìˆ˜ ê°€í‹ˆ         
 {
 	int t;
 
 	if (mode == MODE_IMAGE) {
-		img_render(&img);                                    //ÀÌ¹ÌÁö ¸ğµåÀÏ¶§ ÀÌ¹ÌÁö Á¦ÀÛ
+		img_render(&img);                                    //ì´ë¯¸ì§€ ëª¨ë“œì¼ë•Œ ì´ë¯¸ì§€ ì œì‘
 		if (img.ss.on) {
 			t = img.ss.delay * 1000;
 			if (img.multi.cnt > 0 && img.multi.animate)
-				t = MAX(t, img.multi.length);                           //t ¶û img.multi.length¸¦ ºñ±³ÇØ¼­ t¿¡ ³Ö´Â´Ù
+				t = MAX(t, img.multi.length);                           //t ë‘ img.multi.lengthë¥¼ ë¹„êµí•´ì„œ tì— ë„£ëŠ”ë‹¤
 			set_timeout(slideshow, t, false);
 		}
 	}
-	else {                                             //thumb¸ğµåÀÏ¶§ ÀÌ¹ÌÁö Á¦ÀÛ      
+	else {                                             //thumbëª¨ë“œì¼ë•Œ ì´ë¯¸ì§€ ì œì‘      
 		tns_render(&tns);
 	}
 	update_info();
@@ -488,7 +488,7 @@ void reset_cursor(void)
 	int i;
 	cursor_t cursor = CURSOR_NONE;
 
-	if (mode == MODE_IMAGE) {                                    //ÀÌ¹ÌÁö ¸ğµå¿¡¼­ Ä¿¼­ ¸®¼Â                     
+	if (mode == MODE_IMAGE) {                                    //ì´ë¯¸ì§€ ëª¨ë“œì—ì„œ ì»¤ì„œ ë¦¬ì…‹                     
 		for (i = 0; i < ARRLEN(timeouts); i++) {
 			if (timeouts[i].handler == reset_cursor) {
 				if (timeouts[i].active)
@@ -497,18 +497,18 @@ void reset_cursor(void)
 			}
 		}
 	}
-	else {                                                //thumbs ¸ğµå¿¡¼­ Ä¿¼­ ¸®¼Â            
+	else {                                                //thumbs ëª¨ë“œì—ì„œ ì»¤ì„œ ë¦¬ì…‹            
 		if (tns.cnt != filecnt)
 			cursor = CURSOR_WATCH;
 		else
 			cursor = CURSOR_ARROW;
 	}
-	win_set_cursor(&win, cursor);                                 //Ä¿¼­ À©µµ¿ì¿¡ ¶Ù¿ì±â               
+	win_set_cursor(&win, cursor);                                 //ì»¤ì„œ ìœˆë„ìš°ì— ë›°ìš°ê¸°               
 }
 
 void animate(void)
 {
-	if (img_frame_animate(&img, false)) {                           //img¿¡ frame Á¦ÀÛ »ı±â¸¦ ºÒ¾î³Ö´Â´Ù
+	if (img_frame_animate(&img, false)) {                           //imgì— frame ì œì‘ ìƒê¸°ë¥¼ ë¶ˆì–´ë„£ëŠ”ë‹¤
 		redraw();
 		set_timeout(animate, img.multi.frames[img.multi.sel].delay, true);
 	}
@@ -516,7 +516,7 @@ void animate(void)
 
 void slideshow(void)
 {
-	load_image(fileidx + 1 < filecnt ? fileidx + 1 : 0);               //0°ú filedix + 1À» ºñ±³ÇØ¼­ fileidx + 1 °ªÀ» ·ÎµåÀÌ¹ÌÁöÇÏ°í redraw
+	load_image(fileidx + 1 < filecnt ? fileidx + 1 : 0);               //0ê³¼ filedix + 1ì„ ë¹„êµí•´ì„œ fileidx + 1 ê°’ì„ ë¡œë“œì´ë¯¸ì§€í•˜ê³  redraw
 
 	redraw();
 }
@@ -533,7 +533,7 @@ void run_key_handler(const char* key, unsigned int mask)
 	char kstr[32];
 	struct stat oldst, newst;
 
-	if (keyhandler.cmd == NULL) {											    //keyhandler.cmd  ¾øÀ¸¸é °æ°í
+	if (keyhandler.cmd == NULL) {											    //keyhandler.cmd  ì—†ìœ¼ë©´ ê²½ê³ 
 		if (!keyhandler.warned) {
 			warn("key handler not installed");
 			keyhandler.warned = true;
@@ -546,39 +546,39 @@ void run_key_handler(const char* key, unsigned int mask)
 	snprintf(kstr, sizeof(kstr), "%s%s%s%s",
 		mask & ControlMask ? "C-" : "",
 		mask & Mod1Mask ? "M-" : "",
-		mask & ShiftMask ? "S-" : "", key);										//maskÇÑ ÁÖ¼Ò controal mask, mod1mask, shiftmask¸¦ kstrÀÇ »çÀÌÁî¿¡ ¸Â°Ô kstr¿¡ ÀúÀå
+		mask & ShiftMask ? "S-" : "", key);										//maskí•œ ì£¼ì†Œ controal mask, mod1mask, shiftmaskë¥¼ kstrì˜ ì‚¬ì´ì¦ˆì— ë§ê²Œ kstrì— ì €ì¥
 
-	stat(files[n].path, &oldst);												//oldstÀÇ °ªÀ» files[n]ÀÇ °æ·Î·Î ÀĞ¾î¿È                           
+	stat(files[n].path, &oldst);												//oldstì˜ ê°’ì„ files[n]ì˜ ê²½ë¡œë¡œ ì½ì–´ì˜´                           
 
-	if ((pid = fork()) == 0) {													//children process µ¿ÀÛ                  
+	if ((pid = fork()) == 0) {													//children process ë™ì‘                  
 		execl(keyhandler.cmd, keyhandler.cmd, kstr, files[n].path, NULL);
 		warn("could not exec key handler");
 		exit(EXIT_FAILURE);
 	}
-	else if (pid < 0) {															//children process µ¿ÀÛ ¿¡·¯½Ã
+	else if (pid < 0) {															//children process ë™ì‘ ì—ëŸ¬ì‹œ
 		warn("could not fork key handler");
 		return;
 	}
-	win_set_cursor(&win, CURSOR_WATCH);											//winÃ¢¿¡ Ä¿¼­ ¼¼ÆÃ            
+	win_set_cursor(&win, CURSOR_WATCH);											//winì°½ì— ì»¤ì„œ ì„¸íŒ…            
 
-	waitpid(pid, &status, 0);													//waitpid : ( waitÇÒ ÀÚ½Ä ÇÁ·Î¼¼½º À¯Çü 0º¸´Ù Å©¸é wait , ÀÚ½ÄÀÇ »óÅÂ ³ªÅ¸³¿ , 0ÀÌ¸é return ÇÒ‹š±îÁö block)
-	retval = WEXITSTATUS(status);												//(WEXITSTATUS( status) : ÀÚ½Ä ÇÁ·Î¼¼½º°¡ Á¤»ó Á¾·áµÇ¾úÀ» ¶§ ¹İÈ¯ÇÑ °ª) retval¿¡ ¹İÈ¯°ªÀ» ³Ö´Â´Ù
-	if (WIFEXITED(status) == 0 || retval != 0)									//(WIFEXITED( status) : ÀÚ½Ä ÇÁ·Î¼¼½º°¡ Á¤»óÀûÀ¸·Î Á¾·áµÇ¾ú´Ù¸é TRUE)   Áï ÀÚ½ÄÀÌ Á¤»óÁ¾·á µÇ¾ù´Ù¸é
+	waitpid(pid, &status, 0);													//waitpid : ( waití•  ìì‹ í”„ë¡œì„¸ìŠ¤ ìœ í˜• 0ë³´ë‹¤ í¬ë©´ wait , ìì‹ì˜ ìƒíƒœ ë‚˜íƒ€ëƒ„ , 0ì´ë©´ return í• Â‹Âšê¹Œì§€ block)
+	retval = WEXITSTATUS(status);												//(WEXITSTATUS( status) : ìì‹ í”„ë¡œì„¸ìŠ¤ê°€ ì •ìƒ ì¢…ë£Œë˜ì—ˆì„ ë•Œ ë°˜í™˜í•œ ê°’) retvalì— ë°˜í™˜ê°’ì„ ë„£ëŠ”ë‹¤
+	if (WIFEXITED(status) == 0 || retval != 0)									//(WIFEXITED( status) : ìì‹ í”„ë¡œì„¸ìŠ¤ê°€ ì •ìƒì ìœ¼ë¡œ ì¢…ë£Œë˜ì—ˆë‹¤ë©´ TRUE)   ì¦‰ ìì‹ì´ ì •ìƒì¢…ë£Œ ë˜ì—‡ë‹¤ë©´
 		warn("key handler exited with non-zero return value: %d", retval);
 
-	if (stat(files[n].path, &newst) == 0 &&										//newstÀÇ ³»¿ëÀ» files[n]ÀÇ °æ·Î·Î ÀĞ¾î¿Â°ÍÀÌ 0ÀÌ°í      &oldst.st_mtime, &newst.st_mtime¸¦ ºñ±³ÇØ¼­ °°À¸¸é                        
+	if (stat(files[n].path, &newst) == 0 &&										//newstì˜ ë‚´ìš©ì„ files[n]ì˜ ê²½ë¡œë¡œ ì½ì–´ì˜¨ê²ƒì´ 0ì´ê³       &oldst.st_mtime, &newst.st_mtimeë¥¼ ë¹„êµí•´ì„œ ê°™ìœ¼ë©´                        
 		memcmp(&oldst.st_mtime, &newst.st_mtime, sizeof(oldst.st_mtime)) == 0)
 	{
 		/* file has not changed */
-		win_set_cursor(&win, CURSOR_ARROW);										//ÆÄÀÏÀº º¯È­Áö ¾Ê¾ÑÀ¸¹Ç·Î Ä¿¼­¸¸µé°í ½Ã°£¼³Á¤ÇÏ°í µîµî   
+		win_set_cursor(&win, CURSOR_ARROW);										//íŒŒì¼ì€ ë³€í™”ì§€ ì•Šì•—ìœ¼ë¯€ë¡œ ì»¤ì„œë§Œë“¤ê³  ì‹œê°„ì„¤ì •í•˜ê³  ë“±ë“±   
 		set_timeout(reset_cursor, TO_CURSOR_HIDE, true);
 		return;
 	}
 	if (mode == MODE_IMAGE) {
-		img_close(&img, true);													//ÀÌ¹ÌÁö ¸ğµå¸é ÀÌ¹ÌÁö Á¾·ùÇÏ°í fileidxÀÌ¹ÌÁö ·Îµå               
+		img_close(&img, true);													//ì´ë¯¸ì§€ ëª¨ë“œë©´ ì´ë¯¸ì§€ ì¢…ë¥˜í•˜ê³  fileidxì´ë¯¸ì§€ ë¡œë“œ               
 		load_image(fileidx);
 	}
-	if (!tns_load(&tns, n, &files[n], true, mode == MODE_IMAGE) &&				//thumb ¸ğµåÀÏ´ë
+	if (!tns_load(&tns, n, &files[n], true, mode == MODE_IMAGE) &&				//thumb ëª¨ë“œì¼ëŒ€
 		mode == MODE_THUMB)
 	{
 		remove_file(tns.sel, false);
@@ -591,7 +591,7 @@ void run_key_handler(const char* key, unsigned int mask)
 
 #define MODMASK(mask) ((mask) & (ShiftMask|ControlMask|Mod1Mask))
 
-void on_keypress(XKeyEvent * kev)												//keyÀÔ·Â¿¡ °üÇØ (ÇÊ¿ä¾øÀ½)
+void on_keypress(XKeyEvent * kev)												//keyì…ë ¥ì— ê´€í•´ (í•„ìš”ì—†ìŒ)
 {
 	int i;
 	unsigned int sh;
@@ -620,7 +620,7 @@ void on_keypress(XKeyEvent * kev)												//keyÀÔ·Â¿¡ °üÇØ (ÇÊ¿ä¾øÀ½)
 	}
 	else if (key >= '0' && key <= '9') {
 		/* number prefix for commands */
-		prefix = prefix * 10 + (int)(key - '0');								//¼ıÀÚ ¸í·É¿¡ ´ëÇÑ
+		prefix = prefix * 10 + (int)(key - '0');								//ìˆ«ì ëª…ë ¹ì— ëŒ€í•œ
 		return;
 	}
 	else for (i = 0; i < ARRLEN(keys); i++) {
@@ -640,7 +640,7 @@ void on_keypress(XKeyEvent * kev)												//keyÀÔ·Â¿¡ °üÇØ (ÇÊ¿ä¾øÀ½)
 	prefix = 0;
 }
 
-void on_buttonpress(XButtonEvent * bev)											//¸¶¿ì½º ¹öÆ° ÀÔ·Â¿¡ °üÇØ (ÇÊ¿ä¾øÀ½)9
+void on_buttonpress(XButtonEvent * bev)											//ë§ˆìš°ìŠ¤ ë²„íŠ¼ ì…ë ¥ì— ê´€í•´ (í•„ìš”ì—†ìŒ)9
 {
 	int i, sel;
 	static Time firstclick;
@@ -708,7 +708,7 @@ void on_buttonpress(XButtonEvent * bev)											//¸¶¿ì½º ¹öÆ° ÀÔ·Â¿¡ °üÇØ (ÇÊ¿
 	prefix = 0;
 }
 
-void run(void)																	//input°ªÀ» È®ÀÎÇÏ°í ±×¿¡ ¸Â´Â ÀÌº¥Æ®¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö, ¸ğµå¿¡ ¸Â´Â ÀÌº¥Æ® (keypass,Ä¿¼­)ÀÌ·±°Í ½ÇÇà                     
+void run(void)																	//inputê°’ì„ í™•ì¸í•˜ê³  ê·¸ì— ë§ëŠ” ì´ë²¤íŠ¸ë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜, ëª¨ë“œì— ë§ëŠ” ì´ë²¤íŠ¸ (keypass,ì»¤ì„œ)ì´ëŸ°ê²ƒ ì‹¤í–‰                     
 {
 	int xfd;
 	fd_set fds;
@@ -723,13 +723,13 @@ void run(void)																	//input°ªÀ» È®ÀÎÇÏ°í ±×¿¡ ¸Â´Â ÀÌº¥Æ®¸¦ ½ÇÇàÇÏ´Â 
 		while (mode == MODE_THUMB && tns.cnt < filecnt &&
 			XPending(win.env.dpy) == 0)
 		{
-			/* load thumbnails */												//thumbnail ·ÎµåÇÏ°í tns_loadµÇ¸é tns.cnt Áõ°¡            
+			/* load thumbnails */												//thumbnail ë¡œë“œí•˜ê³  tns_loadë˜ë©´ tns.cnt ì¦ê°€            
 			set_timeout(redraw, TO_REDRAW_THUMBS, false);
 			if (tns_load(&tns, tns.cnt, &files[tns.cnt], false, false)) {
 				tns.cnt++;
 			}
 			else {
-				remove_file(tns.cnt, false);									//tns_load ¾ÈµÉ½Ã ÆÄÀÏ »èÁ¦   
+				remove_file(tns.cnt, false);									//tns_load ì•ˆë ì‹œ íŒŒì¼ ì‚­ì œ   
 				if (tns.sel > 0 && tns.sel >= tns.cnt)
 					tns.sel--;
 			}
@@ -742,29 +742,29 @@ void run(void)																	//input°ªÀ» È®ÀÎÇÏ°í ±×¿¡ ¸Â´Â ÀÌº¥Æ®¸¦ ½ÇÇàÇÏ´Â 
 		while (XPending(win.env.dpy) == 0
 			&& ((to_set = check_timeouts(&timeout)) || info.fd != -1))
 		{
-			/* check for timeouts & input */									//input È®ÀÎ   fds°ªµéÀ» È®ÀÎÇÏ¿© ÀûÀıÇÏ¸é read_info ½ÇÇà
+			/* check for timeouts & input */									//input í™•ì¸   fdsê°’ë“¤ì„ í™•ì¸í•˜ì—¬ ì ì ˆí•˜ë©´ read_info ì‹¤í–‰
 			xfd = ConnectionNumber(win.env.dpy);
-			FD_ZERO(&fds);														//fds³»¿ëÀÇ ¸ğµç ºñÆ® »èÁ¦
-			FD_SET(xfd, &fds);													//fds³»¿ëÁß xfd¿¡ ÇØ´çÇÏ´Â ºñÆ® 1·Î                        
+			FD_ZERO(&fds);														//fdsë‚´ìš©ì˜ ëª¨ë“  ë¹„íŠ¸ ì‚­ì œ
+			FD_SET(xfd, &fds);													//fdsë‚´ìš©ì¤‘ xfdì— í•´ë‹¹í•˜ëŠ” ë¹„íŠ¸ 1ë¡œ                        
 			if (info.fd != -1) {
-				FD_SET(info.fd, &fds);											//info.fd°¡ -1ÀÌ ¾Æ´Ï¸é fds³»¿ëÁß info.fdÀ» Ã£°í                        
-				xfd = MAX(xfd, info.fd);										//xfd¸¦ info.fdÁß ÃÖ°í¸¦ xfd·Î »Ì¾Æ³½´Ù
+				FD_SET(info.fd, &fds);											//info.fdê°€ -1ì´ ì•„ë‹ˆë©´ fdsë‚´ìš©ì¤‘ info.fdì„ ì°¾ê³                         
+				xfd = MAX(xfd, info.fd);										//xfdë¥¼ info.fdì¤‘ ìµœê³ ë¥¼ xfdë¡œ ë½‘ì•„ë‚¸ë‹¤
 			}
-			select(xfd + 1, &fds, 0, 0, to_set ? &timeout : NULL);				//selectÇÔ¼ö : (°Ë»çÇÏ°í ÇÏ´Â ¼ÒÄÏ +1, ÀĞ±â¼Â ÁÖ¼Ò, ¾²±â¼Â ÁÖ¼Ò, ¿¹¿Ü¼Â ÁÖ¼Ò,Å¸ÀÓ¾Æ¿ô½Ã°£¼³Á¤)         
+			select(xfd + 1, &fds, 0, 0, to_set ? &timeout : NULL);				//selectí•¨ìˆ˜ : (ê²€ì‚¬í•˜ê³  í•˜ëŠ” ì†Œì¼“ +1, ì½ê¸°ì…‹ ì£¼ì†Œ, ì“°ê¸°ì…‹ ì£¼ì†Œ, ì˜ˆì™¸ì…‹ ì£¼ì†Œ,íƒ€ì„ì•„ì›ƒì‹œê°„ì„¤ì •)         
 			if (info.fd != -1 && FD_ISSET(info.fd, &fds))
 				read_info();
 		}
 
-		do {																	//Xlib : cÇÁ·Î±×·¡¹Ö ¾ğ¾î·Î ÀÛ¼ºµÈ x À©µ¿ ½Ã½ºÅÛ ÇÁ·ÎÅäÄİ Å©¶óÀÌ¾ğÆ® ¶óÀÌºí·¯¸®
-			XNextEvent(win.env.dpy, &ev);										//ÀÌº¥Æ® »ı±â±â¸¦ ±â´Ù¸®°í ÀÖ´Ù , ÀÌº¥Æ®°¡ ½ÃÀÛµÇ¸é ¾Æ·§ÁÙ·Î°¡°í ¾î¶² ÀÌº¥Æ®ÀÎÁö ½Äº°ÇÏ´Â ±â´É   
+		do {																	//Xlib : cí”„ë¡œê·¸ë˜ë° ì–¸ì–´ë¡œ ì‘ì„±ëœ x ìœˆë™ ì‹œìŠ¤í…œ í”„ë¡œí† ì½œ í¬ë¼ì´ì–¸íŠ¸ ë¼ì´ë¸”ëŸ¬ë¦¬
+			XNextEvent(win.env.dpy, &ev);										//ì´ë²¤íŠ¸ ìƒê¸°ê¸°ë¥¼ ê¸°ë‹¤ë¦¬ê³  ìˆë‹¤ , ì´ë²¤íŠ¸ê°€ ì‹œì‘ë˜ë©´ ì•„ë«ì¤„ë¡œê°€ê³  ì–´ë–¤ ì´ë²¤íŠ¸ì¸ì§€ ì‹ë³„í•˜ëŠ” ê¸°ëŠ¥   
 			discard = false;
-			if (XEventsQueued(win.env.dpy, QueuedAlready) > 0) {				//ÀÌº¥Æ®µéÁß ÀÌº¥Æ®¸¦ °ñ¶ó ³½´Ù
+			if (XEventsQueued(win.env.dpy, QueuedAlready) > 0) {				//ì´ë²¤íŠ¸ë“¤ì¤‘ ì´ë²¤íŠ¸ë¥¼ ê³¨ë¼ ë‚¸ë‹¤
 				XPeekEvent(win.env.dpy, &nextev);
 				switch (ev.type) {
-				case ConfigureNotify:											//Ã¢»óÅÂ°¡ ¹Ù²ğ¶§                        
+				case ConfigureNotify:											//ì°½ìƒíƒœê°€ ë°”ë€”ë•Œ                        
 					discard = ev.type == nextev.type													
 					break;
-				case KeyPress:													//Å°°¡ ´­¸±¶§
+				case KeyPress:													//í‚¤ê°€ ëˆŒë¦´ë•Œ
 					discard = (nextev.type == KeyPress || nextev.type == KeyRelease)
 						&& ev.xkey.keycode == nextev.xkey.keycode;
 					break;
@@ -773,16 +773,16 @@ void run(void)																	//input°ªÀ» È®ÀÎÇÏ°í ±×¿¡ ¸Â´Â ÀÌº¥Æ®¸¦ ½ÇÇàÇÏ´Â 
 		} while (discard);
 
 		switch (ev.type) {
-			/* handle events */													//ÀÌº¥Æ® handle                  
-		case ButtonPress:														//¹öÆ°ÀÌ ´­¸°°æ¿ì ¹öÆ°pressÇÔ¼ö
+			/* handle events */													//ì´ë²¤íŠ¸ handle                  
+		case ButtonPress:														//ë²„íŠ¼ì´ ëˆŒë¦°ê²½ìš° ë²„íŠ¼pressí•¨ìˆ˜
 			on_buttonpress(&ev.xbutton);
 			break;
-		case ClientMessage:														//´Ù¸¥ Å¬¶óÀÌ¾ğÆ®°¡ ¸Ş¼¼Áö¸¦ º¸³»¿ÔÀ»‹š         
+		case ClientMessage:														//ë‹¤ë¥¸ í´ë¼ì´ì–¸íŠ¸ê°€ ë©”ì„¸ì§€ë¥¼ ë³´ë‚´ì™”ì„Â‹Âš         
 			if ((Atom)ev.xclient.data.l[0] == atoms[ATOM_WM_DELETE_WINDOW])
 				return;
 			break;
-		case ConfigureNotify:													//Ã¢ÀÇ »óÅÂ°¡ ¹Ù²î¾úÀ»‹š                  
-			if (win_configure(&win, &ev.xconfigure)) {							//ÀÌ¹ÌÁöÀÇ ±¸¼ºÀ»º¸°í ÀÌ¹ÌÁö¸ğµå¿Í thumbs¸ğµå ±¸º°
+		case ConfigureNotify:													//ì°½ì˜ ìƒíƒœê°€ ë°”ë€Œì—ˆì„Â‹Âš                  
+			if (win_configure(&win, &ev.xconfigure)) {							//ì´ë¯¸ì§€ì˜ êµ¬ì„±ì„ë³´ê³  ì´ë¯¸ì§€ëª¨ë“œì™€ thumbsëª¨ë“œ êµ¬ë³„
 				if (mode == MODE_IMAGE) {
 					img.dirty = true;
 					img.checkpan = true;
@@ -790,7 +790,7 @@ void run(void)																	//input°ªÀ» È®ÀÎÇÏ°í ±×¿¡ ¸Â´Â ÀÌº¥Æ®¸¦ ½ÇÇàÇÏ´Â 
 				else {
 					tns.dirty = true;
 				}
-				if (!resized || win.fullscreen) {								//¸ğµå¿¡ ¸Â°Ô resizeÇØ¼­ redraw      
+				if (!resized || win.fullscreen) {								//ëª¨ë“œì— ë§ê²Œ resizeí•´ì„œ redraw      
 					redraw();
 					set_timeout(clear_resize, TO_REDRAW_RESIZE, false);
 					resized = true;
@@ -800,13 +800,13 @@ void run(void)																	//input°ªÀ» È®ÀÎÇÏ°í ±×¿¡ ¸Â´Â ÀÌº¥Æ®¸¦ ½ÇÇàÇÏ´Â 
 				}
 			}
 			break;
-		case Expose:															//winÃ¢¿¡ Ç¥Çö         
+		case Expose:															//winì°½ì— í‘œí˜„         
 			win_expose(&win, &ev.xexpose);
 			break;
-		case KeyPress:															//Å°ÀÔ·Â               
+		case KeyPress:															//í‚¤ì…ë ¥               
 			on_keypress(&ev.xkey);
 			break;
-		case MotionNotify:														//µ¿ÀÛ ¾Ë¸²À» ÀÌ¹ÌÁö¸ğµåÀÏ°æ¿ì win¿¡ Ä¿¼­ ¸¸µë         
+		case MotionNotify:														//ë™ì‘ ì•Œë¦¼ì„ ì´ë¯¸ì§€ëª¨ë“œì¼ê²½ìš° winì— ì»¤ì„œ ë§Œë“¬         
 			if (mode == MODE_IMAGE) {
 				win_set_cursor(&win, CURSOR_ARROW);
 				set_timeout(reset_cursor, TO_CURSOR_HIDE, true);
@@ -871,7 +871,7 @@ void run(void)																	//input°ªÀ» È®ÀÎÇÏ°í ±×¿¡ ¸Â´Â ÀÌº¥Æ®¸¦ ½ÇÇàÇÏ´Â 
 
 int fncmp(const void* a, const void* b)
 {
-	return strcoll(((fileinfo_t*)a)->name, ((fileinfo_t*)b)->name);				//(fileinfo_t*) a)->name¿Í ((fileinfo_t*) b)->name¸¦ ´Ù¸¥°ÍÀÌ ³ªÅ¸³¯¶§±îÁö ºñ±³
+	return strcoll(((fileinfo_t*)a)->name, ((fileinfo_t*)b)->name);				//(fileinfo_t*) a)->nameì™€ ((fileinfo_t*) b)->nameë¥¼ ë‹¤ë¥¸ê²ƒì´ ë‚˜íƒ€ë‚ ë•Œê¹Œì§€ ë¹„êµ
 }
 
 int main(int argc, char** argv)
@@ -888,33 +888,33 @@ int main(int argc, char** argv)
 	}
 	r_dir_t dir;
 
-	parse_options(argc, argv);									                //Command optionÀ» ÁØ´Ù (¸í·É¾î °°Àº°Å ¿¹¸¦µé¾î d´Â ¹¹´Ù ÀÌ·±½Ä ) 
+	parse_options(argc, argv);									                //Command optionì„ ì¤€ë‹¤ (ëª…ë ¹ì–´ ê°™ì€ê±° ì˜ˆë¥¼ë“¤ì–´ dëŠ” ë­ë‹¤ ì´ëŸ°ì‹ ) 
 
-	if (options->clean_cache) {									                //optionÀÌ clean_cache¸é thumbs ÃÊ±âÈ­,Ä³½Ãµµ ÃÊ±âÈ­
+	if (options->clean_cache) {									                //optionì´ clean_cacheë©´ thumbs ì´ˆê¸°í™”,ìºì‹œë„ ì´ˆê¸°í™”
 		tns_init(&tns, 0, NULL);
 		tns_clean_cache(&tns);
 		exit(EXIT_SUCCESS);
 	}
 
-	if (options->filecnt == 0 && !options->from_stdin) {						//from_stdion : typedof struct { bool from_stdin}ÀÎ fils listÀÓ               
+	if (options->filecnt == 0 && !options->from_stdin) {						//from_stdion : typedof struct { bool from_stdin}ì¸ fils listì„               
 		print_usage();
 		exit(EXIT_FAILURE);
 	}
 
-	if (options->recursive || options->from_stdin)								//options °¡ recursive(Àç±ÍÇÔ¼ö) ÀÌ°Å³ª from_stdinÀÌ¸é       
-		filecnt = FILENAME_CNT;									                //filecent°¡   ¿­°ÅÇüÀÎ FILENAME_CNT = 1024
+	if (options->recursive || options->from_stdin)								//options ê°€ recursive(ì¬ê·€í•¨ìˆ˜) ì´ê±°ë‚˜ from_stdinì´ë©´       
+		filecnt = FILENAME_CNT;									                //filecentê°€   ì—´ê±°í˜•ì¸ FILENAME_CNT = 1024
 	else
-		filecnt = options->filecnt;									            //±×°Ô ¾Æ´Ï¸é filecent°¡ options
+		filecnt = options->filecnt;									            //ê·¸ê²Œ ì•„ë‹ˆë©´ filecentê°€ options
 
 	files = (fileinfo_t*)s_malloc(filecnt * sizeof(fileinfo_t));
 	fileidx = 0;
 
-	if (options->from_stdin) {									                //options°¡ from_stdinÀÎ file listÇüÀÌ¸é            
+	if (options->from_stdin) {									                //optionsê°€ from_stdinì¸ file listí˜•ì´ë©´            
 		filename = NULL;
-		while ((len = get_line(&filename, &n, stdin)) > 0) {					//(len :size-t Çü) lenÀÌ filenameÀÇ ³»¿ëÀÌ n³»¿ëÀÇ Å©±â·Î stdin¿¡¼­ °¡Á®¿Í¼­ ÀÌ°Ô 0º¸´Ù Å©¸é  
+		while ((len = get_line(&filename, &n, stdin)) > 0) {					//(len :size-t í˜•) lenì´ filenameì˜ ë‚´ìš©ì´ në‚´ìš©ì˜ í¬ê¸°ë¡œ stdinì—ì„œ ê°€ì ¸ì™€ì„œ ì´ê²Œ 0ë³´ë‹¤ í¬ë©´  
 			if (filename[len - 1] == '\n')
-				filename[len - 1] = '\0';									    //filenameÀÇ ¿­ÀÌ nullÀÌ¸é ÁÙ¹Ù²Ş
-			check_add_file(filename);											//ÆÄÀÏ Ãß°¡
+				filename[len - 1] = '\0';									    //filenameì˜ ì—´ì´ nullì´ë©´ ì¤„ë°”ê¿ˆ
+			check_add_file(filename);											//íŒŒì¼ ì¶”ê°€
 		}
 		if (filename != NULL)
 			free(filename);
@@ -923,81 +923,81 @@ int main(int argc, char** argv)
 	for (i = 0; i < options->filecnt; i++) {
 		filename = options->filenames[i];
 
-		if (stat(filename, &fstats) < 0) {										//filenameÀÇ Á¤º¸°¡ 0º¸´Ù ÀÛÀ¸¸é ÆÄÀÏ¾øÀ½ ¶Ù¿ò
+		if (stat(filename, &fstats) < 0) {										//filenameì˜ ì •ë³´ê°€ 0ë³´ë‹¤ ì‘ìœ¼ë©´ íŒŒì¼ì—†ìŒ ë›°ì›€
 			warn("could not stat file: %s", filename);
 			continue;
 		}
-		if (!S_ISDIR(fstats.st_mode)) {											//(S_ISDIR : µğ·ºÅä¸® ÆÄÀÏÀÎÁö ÆÇº°)
-			check_add_file(filename);											//ÆÇº° ½ÇÆĞ½Ã ÆÄÀÏ Ãß°¡
+		if (!S_ISDIR(fstats.st_mode)) {											//(S_ISDIR : ë””ë ‰í† ë¦¬ íŒŒì¼ì¸ì§€ íŒë³„)
+			check_add_file(filename);											//íŒë³„ ì‹¤íŒ¨ì‹œ íŒŒì¼ ì¶”ê°€
 		}
 		else {
 			if (!options->recursive) {
-				warn("ignoring directory: %s", filename);						//Àç±ÍÇÔ¼ö°¡ ¾Æ´Ï¸é µğ·ºÅä¸® ¹«½Ã ¾Ë¸²         
+				warn("ignoring directory: %s", filename);						//ì¬ê·€í•¨ìˆ˜ê°€ ì•„ë‹ˆë©´ ë””ë ‰í† ë¦¬ ë¬´ì‹œ ì•Œë¦¼         
 				continue;   Ignore dotfiles for - r
 			}
-			if (r_opendir(&dir, filename) < 0) {								//µğ·ºÅä¸® ¿­±â ÇÔ¼ö°¡ 0º¸´Ù ÀÛÀ¸¸é µğ·ºÅä¸® ¸ø¿¬´Ù ¾Ë¸²
+			if (r_opendir(&dir, filename) < 0) {								//ë””ë ‰í† ë¦¬ ì—´ê¸° í•¨ìˆ˜ê°€ 0ë³´ë‹¤ ì‘ìœ¼ë©´ ë””ë ‰í† ë¦¬ ëª»ì—°ë‹¤ ì•Œë¦¼
 				warn("could not open directory: %s", filename);
 				continue;
 			}
-			start = fileidx;													//int start°¡ fileidx               
-			while ((filename = r_readdir(&dir)) != NULL) {						//µğ·ºÅä¸® ÀĞ±â ÇÔ¼ö°¡ filenameÀÌ¶û °°Àº¸é ÆÄÀÏ Ãß°¡                     
+			start = fileidx;													//int startê°€ fileidx               
+			while ((filename = r_readdir(&dir)) != NULL) {						//ë””ë ‰í† ë¦¬ ì½ê¸° í•¨ìˆ˜ê°€ filenameì´ë‘ ê°™ì€ë©´ íŒŒì¼ ì¶”ê°€                     
 				check_add_file(filename);
 				free((void*)filename);
 			}
-			r_closedir(&dir);													//µğ·ºÅä¸® ´İ±â   
+			r_closedir(&dir);													//ë””ë ‰í† ë¦¬ ë‹«ê¸°   
 			if (fileidx - start > 1)
-				qsort(files + start, fileidx - start, sizeof(fileinfo_t), fncmp); //qsort(Á¤·ÄÇÏ°íÀÚÇÏ´Â ¹è¿­ÀÇ Æ÷ÀÎÅÍ, ¹è¿­ÀÇ °¢ ¿ø¼ÒµéÀÇ ÃÑ¼ö, ¹è¿­¿¡¼­ ¿ø¼ÒÇÏ³ªÀÇ Å©±â. ºñ±³¸¦ ¼öÇàÇÒ ÇÔ¼ö Æ÷ÀÎÅÍ)
-		}																		//files+start¸¦ Á¤·Ä                        
+				qsort(files + start, fileidx - start, sizeof(fileinfo_t), fncmp); //qsort(ì •ë ¬í•˜ê³ ìí•˜ëŠ” ë°°ì—´ì˜ í¬ì¸í„°, ë°°ì—´ì˜ ê° ì›ì†Œë“¤ì˜ ì´ìˆ˜, ë°°ì—´ì—ì„œ ì›ì†Œí•˜ë‚˜ì˜ í¬ê¸°. ë¹„êµë¥¼ ìˆ˜í–‰í•  í•¨ìˆ˜ í¬ì¸í„°)
+		}																		//files+startë¥¼ ì •ë ¬                        
 	}
 
 	if (fileidx == 0) {
-		fprintf(stderr, "sxiv: no valid image file given, aborting\n");         //fileidx == 0 ÀÌ¸é ÀÌ¹ÌÁö ¾ø´Ù ¾Ë¸²
+		fprintf(stderr, "sxiv: no valid image file given, aborting\n");         //fileidx == 0 ì´ë©´ ì´ë¯¸ì§€ ì—†ë‹¤ ì•Œë¦¼
 		exit(EXIT_FAILURE);
 	}
 
 	filecnt = fileidx;
-	fileidx = options->startnum < filecnt ? options->startnum : 0;				//(startnum : Ã¹ ½ÃÀÛ ÀÔ·Â¼ö) startnum < filecnt startnumÀÌ ÀÛÀ¸¸é startnum Å©¸é 0 ÀÌ °á°ú¸¦ fileidx·Î ÇÑ´Ù               
+	fileidx = options->startnum < filecnt ? options->startnum : 0;				//(startnum : ì²« ì‹œì‘ ì…ë ¥ìˆ˜) startnum < filecnt startnumì´ ì‘ìœ¼ë©´ startnum í¬ë©´ 0 ì´ ê²°ê³¼ë¥¼ fileidxë¡œ í•œë‹¤               
 
 	win_init(&win);
 	img_init(&img, &win);
 
-	if ((homedir = getenv("XDG_CONFIG_HOME")) == NULL || homedir[0] == '\0') {	//XDG_CONFIG_HOMEÀ» Ã£¾Æ homedir·Î Á¤ÀÇµÇ¸é
-		homedir = getenv("HOME");												//homdirÁÖ¼Ò°ªÀ» HOME¶ó´Â º¯¼ö¸¦ Ã£¾Æ ÁöÁ¤                           
-		dsuffix = "/.config";													//dsuffixÀÇ ÁÖ¼Ò°ªÀ» ./confi¤¾                                          
+	if ((homedir = getenv("XDG_CONFIG_HOME")) == NULL || homedir[0] == '\0') {	//XDG_CONFIG_HOMEì„ ì°¾ì•„ homedirë¡œ ì •ì˜ë˜ë©´
+		homedir = getenv("HOME");												//homdirì£¼ì†Œê°’ì„ HOMEë¼ëŠ” ë³€ìˆ˜ë¥¼ ì°¾ì•„ ì§€ì •                           
+		dsuffix = "/.config";													//dsuffixì˜ ì£¼ì†Œê°’ì„ ./confiã…                                          
 	}
-	if (homedir != NULL) {														//homedirÁÖ¼Ò°ªÀÌ NULLÀÌ ¾Æ´Ï¸é
-		char** cmd[] = { &info.cmd, &keyhandler.cmd };							//cmd[]ÀÇ ÀÌÁßÆ÷ÀÎÅÍ°¡ &info.cmd, &keyhandler.cmd¸é
+	if (homedir != NULL) {														//homedirì£¼ì†Œê°’ì´ NULLì´ ì•„ë‹ˆë©´
+		char** cmd[] = { &info.cmd, &keyhandler.cmd };							//cmd[]ì˜ ì´ì¤‘í¬ì¸í„°ê°€ &info.cmd, &keyhandler.cmdë©´
 		const char* name[] = { "image-info", "key-handler" };
 
 		for (i = 0; i < ARRLEN(cmd); i++) {
-			len = strlen(homedir) + strlen(dsuffix) + strlen(name[i]) + 12;		//lenÀÇ »çÀÌÁî´Â homedir, dsuffix, name[i]´õÇÑ°Å + 12
+			len = strlen(homedir) + strlen(dsuffix) + strlen(name[i]) + 12;		//lenì˜ ì‚¬ì´ì¦ˆëŠ” homedir, dsuffix, name[i]ë”í•œê±° + 12
 			*cmd[i] = (char*)s_malloc(len);
 			snprintf(*cmd[i], len, "%s%s/sxiv/exec/%s", homedir, dsuffix, name[i]);
-			if (access(*cmd[i], X_OK) != 0) {									//cmd[]ÀÇ ÁÖ¼Ò°ªÀ» ½ÇÇà°¡´É È®ÀÎÇÏ°í 0ÀÌ¾Æ´Ï¸é cmd[]¸¦ freeÇØÁØ´Ù                           
+			if (access(*cmd[i], X_OK) != 0) {									//cmd[]ì˜ ì£¼ì†Œê°’ì„ ì‹¤í–‰ê°€ëŠ¥ í™•ì¸í•˜ê³  0ì´ì•„ë‹ˆë©´ cmd[]ë¥¼ freeí•´ì¤€ë‹¤                           
 				free(*cmd[i]);
-				*cmd[i] = NULL;													//cmd[i]ÁÖ¼Ò°ªÀ» NULL   
+				*cmd[i] = NULL;													//cmd[i]ì£¼ì†Œê°’ì„ NULL   
 			}
 		}
 	}
 	else {
-		warn("could not locate exec directory");								//½ÇÇàµğ·ºÅä¸® À§Ä¡ÇÏÁö ¾Ê´Ù´Â °æ°í                  
+		warn("could not locate exec directory");								//ì‹¤í–‰ë””ë ‰í† ë¦¬ ìœ„ì¹˜í•˜ì§€ ì•Šë‹¤ëŠ” ê²½ê³                   
 	}
 	info.fd = -1;
 
-	if (options->thumb_mode) {													//optionÀÌ thumb ¸ğµå¸é tns ÃÊ±âÈ­
+	if (options->thumb_mode) {													//optionì´ thumb ëª¨ë“œë©´ tns ì´ˆê¸°í™”
 		mode = MODE_THUMB;
 		tns_init(&tns, filecnt, &win);
 		while (!tns_load(&tns, 0, &files[0], false, false))
 			remove_file(0, false);
 		tns.cnt = 1;
 	}
-	else {																		//ÀÌ¹ÌÁö¸ğµåÀÌ¸é tns.thumb=NULLÇÒ´ç ÀÌ¹ÌÁö ·Îµå
+	else {																		//ì´ë¯¸ì§€ëª¨ë“œì´ë©´ tns.thumb=NULLí• ë‹¹ ì´ë¯¸ì§€ ë¡œë“œ
 		mode = MODE_IMAGE;
 		tns.thumbs = NULL;
 		load_image(fileidx);
 	}
 
-	win_open(&win);																//win ½ÃÀÛÇÏ°í run½ÇÇà                     
+	win_open(&win);																//win ì‹œì‘í•˜ê³  runì‹¤í–‰                     
 
 	run();
 	cleanup();
